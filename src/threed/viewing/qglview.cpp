@@ -52,6 +52,7 @@
 #include <QtCore/qtimer.h>
 #include <QtCore/qdatetime.h>
 #include <QtCore/qdebug.h>
+#include <QtCore/qmath.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -1379,16 +1380,12 @@ void QGLView::wheel(int delta)
     } else {
         // enable this to get wheel navigation that actually zooms by moving the
         // camera back, as opposed to making the angle of view wider.        
-        QVector3D viewVector= camera()->eye() - camera()->center();
-        qreal zoomMag = viewVector.length();
-        qreal zoomIncrement = -float(delta) / 100.0f;
-        if (!qFuzzyIsNull(zoomIncrement))
+        QVector3D viewVector = camera()->eye() - camera()->center();
+        qreal zoomIncrement  = -float(delta) / 120.0f;
+        qreal zoomMag = qPow(1.15f, zoomIncrement);
+        if (!qFuzzyIsNull(zoomMag))
         {
-            zoomMag += zoomIncrement;
-            if (zoomMag < 1.0f)
-                zoomMag = 1.0f;
-
-            QRay3D viewLine(camera()->center(), viewVector.normalized());
+            QRay3D viewLine(camera()->center(), viewVector);
             camera()->setEye(viewLine.point(zoomMag));
         }
     }

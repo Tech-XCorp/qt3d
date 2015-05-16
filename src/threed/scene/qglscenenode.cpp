@@ -354,6 +354,7 @@ void QGLSceneNode::setGeometry(QGeometryData geometry)
 {
     Q_D(QGLSceneNode);
     d->geometry = geometry;
+    invalidateBoundingBox();
     emit updated();
 }
 
