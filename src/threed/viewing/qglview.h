@@ -123,11 +123,13 @@ protected:
     QPointF viewDelta(const QPoint &delta) const
         { return viewDelta(delta.x(), delta.y()); }
 
+// JRC: making protected to allow overriding.
+    QGLViewPrivate *d;
+
 private Q_SLOTS:
     void cameraChanged();
 
 private:
-    QGLViewPrivate *d;
 
     static void sendEnterEvent(QObject *object);
     static void sendLeaveEvent(QObject *object);
