@@ -921,6 +921,7 @@ void QGLView::earlyPaintGL(QGLPainter *painter)
 /*!
     Processes the mouse press event \a e.
 */
+// SB: Altering this class to meet our own demands
 void QGLView::mousePressEvent(QMouseEvent *e)
 {
     QObject *object;
@@ -949,7 +950,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
                           e->modifiers());
         QCoreApplication::sendEvent(object, &event);
     } else if ((d->options & QGLView::CameraNavigation) != 0 &&
-                    e->button() == Qt::LeftButton) {
+                    e->button() == Qt::RightButton) {
         d->panning = true;
         d->lastPan = d->startPan = e->pos();
         d->startEye = d->camera->eye();
