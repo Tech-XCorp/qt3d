@@ -951,6 +951,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
         QCoreApplication::sendEvent(object, &event);
     } else if ((d->options & QGLView::CameraNavigation) != 0 &&
                     e->button() == Qt::RightButton) {
+        std::cout << "USING RIGHT MOUSE, IN QGLVIEW" << std::endl;
         d->panning = true;
         d->lastPan = d->startPan = e->pos();
         d->startEye = d->camera->eye();
