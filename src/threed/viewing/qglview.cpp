@@ -925,13 +925,14 @@ void QGLView::earlyPaintGL(QGLPainter *painter)
 void QGLView::mousePressEvent(QMouseEvent *e)
 {
   std::cout << "mousePressEvent" << std::endl;
+    Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
     QObject *object;
-    if (!d->panning && (d->options & QGLView::ObjectPicking) != 0)
+    if (!d->panning && (d->options & QGLView::ObjectPicking) != 0 && e->button() == Qt::LeftButton)
         object = objectForPoint(e->pos());
     else
         object = 0;
     if (d->pressedObject) {
-      std::cout << "pressing an object, here want a key press to activate" << std::endl;
+      std::cout << "when does this get called?" << std::endl;
         // Send the press event to the pressed object.  Use a position
         // of (0, 0) if the mouse is still within the pressed object,
         // or (-1, -1) if the mouse is no longer within the pressed object.
@@ -941,7 +942,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
              e->globalPos(), e->button(), e->buttons(), e->modifiers());
         QCoreApplication::sendEvent(d->pressedObject, &event);
     } else if (object) {
-      std::cout << "when does this get called?" << std::endl;
+      std::cout << "pressing an object, here want a key press to activate" << std::endl;
         // Record the object that was pressed and forward the event.
         d->pressedObject = object;
         d->enteredObject = 0;
@@ -973,7 +974,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 */
 void QGLView::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (d->panning && e->button() == Qt::LeftButton) {
+    if (d->panning && e->button() == Qt::RightButton) {
         d->panning = false;
 #ifndef QT_NO_CURSOR
         unsetCursor();
