@@ -39,7 +39,7 @@
 **
 ****************************************************************************/
 
-#include "iosteam"
+#include "iostream"
 #include "qglview.h"
 #include "qglframebufferobject.h"
 #include "qglsubsurface.h"
@@ -931,6 +931,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
     else
         object = 0;
     if (d->pressedObject) {
+      std::cout << "pressing an object, here want a key press to activate" << std::endl;
         // Send the press event to the pressed object.  Use a position
         // of (0, 0) if the mouse is still within the pressed object,
         // or (-1, -1) if the mouse is no longer within the pressed object.
@@ -940,6 +941,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
              e->globalPos(), e->button(), e->buttons(), e->modifiers());
         QCoreApplication::sendEvent(d->pressedObject, &event);
     } else if (object) {
+      std::cout << "when does this get called?" << std::endl;
         // Record the object that was pressed and forward the event.
         d->pressedObject = object;
         d->enteredObject = 0;
@@ -952,6 +954,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
         QCoreApplication::sendEvent(object, &event);
     } else if ((d->options & QGLView::CameraNavigation) != 0 &&
                     e->button() == Qt::RightButton) {
+      std::cout << "using right mouse button" << std::endl;
         d->panning = true;
         d->lastPan = d->startPan = e->pos();
         d->startEye = d->camera->eye();
