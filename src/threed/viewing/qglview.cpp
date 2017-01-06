@@ -925,9 +925,9 @@ void QGLView::earlyPaintGL(QGLPainter *painter)
 void QGLView::mousePressEvent(QMouseEvent *e)
 {
   std::cout << "mousePressEvent" << std::endl;
-//    Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
+    Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
     QObject *object;
-    if (!d->panning && (d->options & QGLView::ObjectPicking) != 0)
+    if (!d->panning && (d->options & QGLView::ObjectPicking) != 0 && e->button() == Qt::LeftButton)
         object = objectForPoint(e->pos());
     else
         object = 0;
@@ -974,7 +974,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 */
 void QGLView::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (d->panning && e->button() == Qt::LeftButton) {
+    if (d->panning && e->button() == Qt::RightButton) {
         d->panning = false;
 #ifndef QT_NO_CURSOR
         unsetCursor();
