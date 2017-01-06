@@ -927,7 +927,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
   std::cout << "mousePressEvent" << std::endl;
     Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
     QObject *object;
-    if (!d->panning && (d->options & QGLView::ObjectPicking) != 0 && e->button() == Qt::LeftButton)
+    if (!d->panning && (d->options & QGLView::ObjectPicking) != 0)
         object = objectForPoint(e->pos());
     else
         object = 0;
