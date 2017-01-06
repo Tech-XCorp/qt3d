@@ -39,6 +39,7 @@
 **
 ****************************************************************************/
 
+#include "iosteam"
 #include "qglview.h"
 #include "qglframebufferobject.h"
 #include "qglsubsurface.h"
