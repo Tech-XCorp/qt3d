@@ -974,7 +974,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 */
 void QGLView::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (d->panning && e->button() == Qt::RightButton) {
+    if (d->panning && e->button() == Qt::LeftButton) {
         d->panning = false;
 #ifndef QT_NO_CURSOR
         unsetCursor();
