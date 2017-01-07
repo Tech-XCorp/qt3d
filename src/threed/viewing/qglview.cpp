@@ -965,6 +965,11 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 #ifndef QT_NO_CURSOR
         setCursor(Qt::ClosedHandCursor);
 #endif
+    } else if ((d->options & QGLView::CameraNavigation) != 0 &&
+                    e->button() == Qt::LeftButton && modifiers == Qt::ShiftModifier) {
+#ifndef QT_NO_CURSOR
+        setCursor(Qt::ClosedHandCursor);
+#endif
     }
     QGLWidget::mousePressEvent(e);
 }
