@@ -924,7 +924,7 @@ void QGLView::earlyPaintGL(QGLPainter *painter)
 */
 void QGLView::mousePressEvent(QMouseEvent *e)
 {
-  std::cout << "mousePressEvent" << std::endl;
+//  SB: Ensure left click selects objects
     Qt::KeyboardModifiers modifiers = QApplication::keyboardModifiers();
     QObject *object;
     if (!d->panning && (d->options & QGLView::ObjectPicking) != 0 && e->button() == Qt::LeftButton)
@@ -932,7 +932,6 @@ void QGLView::mousePressEvent(QMouseEvent *e)
     else
         object = 0;
     if (d->pressedObject) {
-      std::cout << "when does this get called?" << std::endl;
         // Send the press event to the pressed object.  Use a position
         // of (0, 0) if the mouse is still within the pressed object,
         // or (-1, -1) if the mouse is no longer within the pressed object.
@@ -942,7 +941,6 @@ void QGLView::mousePressEvent(QMouseEvent *e)
              e->globalPos(), e->button(), e->buttons(), e->modifiers());
         QCoreApplication::sendEvent(d->pressedObject, &event);
     } else if (object) {
-      std::cout << "pressing an object, here want a key press to activate" << std::endl;
         // Record the object that was pressed and forward the event.
         d->pressedObject = object;
         d->enteredObject = 0;
@@ -953,11 +951,9 @@ void QGLView::mousePressEvent(QMouseEvent *e)
                           e->globalPos(), e->button(), e->buttons(),
                           e->modifiers());
         QCoreApplication::sendEvent(object, &event);
+// SB: Use right click for rotating
     } else if ((d->options & QGLView::CameraNavigation) != 0 &&
                     e->button() == Qt::RightButton) {
-      std::cout << "using right mouse button" << std::endl;
-        d->panning = true;
-        d->lastPan = d->startPan = e->pos();
         d->startEye = d->camera->eye();
         d->startCenter = d->camera->center();
         d->startUpVector = d->camera->upVector();
@@ -965,12 +961,14 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 #ifndef QT_NO_CURSOR
         setCursor(Qt::ClosedHandCursor);
 #endif
+// SB Still allow shift left click and shift for panning
     } else if ((d->options & QGLView::CameraNavigation) != 0 &&
                     e->button() == Qt::LeftButton && modifiers == Qt::ShiftModifier) {
 #ifndef QT_NO_CURSOR
         setCursor(Qt::ClosedHandCursor);
 #endif
         d->panning = true;
+        d->lastPan = d->startPan = e->pos();
     }
     QGLWidget::mousePressEvent(e);
 }
@@ -980,7 +978,8 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 */
 void QGLView::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (d->panning && e->button() == Qt::RightButton) {
+// SB: Allow release on either mouse button
+    if (d->panning && e->button() == Qt::RightButton || e->button() == Qt::LeftButton) {
         d->panning = false;
 #ifndef QT_NO_CURSOR
         unsetCursor();
