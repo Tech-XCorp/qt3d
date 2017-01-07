@@ -970,6 +970,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 #ifndef QT_NO_CURSOR
         setCursor(Qt::ClosedHandCursor);
 #endif
+        d->panning = true;
     }
     QGLWidget::mousePressEvent(e);
 }
