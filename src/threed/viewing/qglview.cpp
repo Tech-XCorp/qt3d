@@ -954,7 +954,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 // SB: Use right click for rotating
     } else if ((d->options & QGLView::CameraNavigation) != 0 &&
                     e->button() == Qt::RightButton) {
-        d->panning = false;
+        d->panning = true;
         d->lastPan = d->startPan = e->pos();
         d->startEye = d->camera->eye();
         d->startCenter = d->camera->center();
@@ -1066,7 +1066,7 @@ void QGLView::mouseMoveEvent(QMouseEvent *e)
         d->lastPan = e->pos();
         if ((e->modifiers() & Qt::ControlModifier) != 0)
             wheel(delta.y() * -60);
-        else if ((e->modifiers() & Qt::ShiftModifier) != 0)
+        else if ((e->modifiers() & Qt::ShiftModifier) != 0 && e->button() != Qt::RightButton)
             pan(delta.x(), delta.y());
         else
             rotate(delta.x(), delta.y());
