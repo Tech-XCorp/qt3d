@@ -965,10 +965,11 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 // SB Still allow shift left click and shift for panning
     } else if ((d->options & QGLView::CameraNavigation) != 0 &&
                     e->button() == Qt::LeftButton && modifiers == Qt::ShiftModifier) {
+        d->panning = true;
+        d->lastPan = d->startPan = e->pos();
 #ifndef QT_NO_CURSOR
         setCursor(Qt::ClosedHandCursor);
 #endif
-        d->panning = true;
     }
     QGLWidget::mousePressEvent(e);
 }
@@ -979,7 +980,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 void QGLView::mouseReleaseEvent(QMouseEvent *e)
 {
 // SB: Allow release on either mouse button
-    if (d->panning && e->button() == Qt::RightButton || e->button() == Qt::LeftButton) {
+    if (e->button() == Qt::RightButton || e->button() == Qt::LeftButton) {
         d->panning = false;
 #ifndef QT_NO_CURSOR
         unsetCursor();
