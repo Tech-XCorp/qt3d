@@ -969,6 +969,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
         d->panning = true;
         d->lastPan = d->startPan = e->pos();
         d->startEye = d->camera->eye();
+        d->startCenter = d->camera->center();
 #ifndef QT_NO_CURSOR
         setCursor(Qt::ClosedHandCursor);
 #endif
