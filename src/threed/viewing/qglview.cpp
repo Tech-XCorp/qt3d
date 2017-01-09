@@ -968,6 +968,7 @@ void QGLView::mousePressEvent(QMouseEvent *e)
                     e->button() == Qt::LeftButton && modifiers == Qt::ShiftModifier) {
         d->panning = true;
         d->lastPan = d->startPan = e->pos();
+        d->startEye = d->camera->eye();
 #ifndef QT_NO_CURSOR
         setCursor(Qt::ClosedHandCursor);
 #endif
