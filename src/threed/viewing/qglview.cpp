@@ -39,7 +39,6 @@
 **
 ****************************************************************************/
 
-#include "iostream"
 #include "qglview.h"
 #include "qglframebufferobject.h"
 #include "qglsubsurface.h"
