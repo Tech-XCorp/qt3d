@@ -554,7 +554,6 @@ QGLView::QGLView(QWidget *parent)
 {
     d = new QGLViewPrivate(this);
     setMouseTracking(true);
-    rightclick = false;
     if (!parent)
         d->processStereoOptions(this);
 }
@@ -572,7 +571,6 @@ QGLView::QGLView(const QGLFormat& format, QWidget *parent)
 {
     d = new QGLViewPrivate(this);
     setMouseTracking(true);
-    rightclick = false;
     if (!parent)
         d->processStereoOptions(this);
 }
@@ -965,7 +963,6 @@ void QGLView::mousePressEvent(QMouseEvent *e)
 #ifndef QT_NO_CURSOR
         setCursor(Qt::ClosedHandCursor);
 #endif
-        rightclick = true;
 // SB Still allow shift left click and shift for panning
     } else if ((d->options & QGLView::CameraNavigation) != 0 &&
                     e->button() == Qt::LeftButton && modifiers == Qt::ShiftModifier) {
@@ -1069,10 +1066,8 @@ void QGLView::mouseMoveEvent(QMouseEvent *e)
         d->lastPan = e->pos();
         if ((e->modifiers() & Qt::ControlModifier) != 0)
             wheel(delta.y() * -60);
-        else if ((e->modifiers() & Qt::ShiftModifier) != 0 && !rightclick) {
-          std::cout << "in third" << std::endl; 
+        else if ((e->modifiers() & Qt::ShiftModifier) != 0)
             pan(delta.x(), delta.y());
-        }
         else
             rotate(delta.x(), delta.y());
     } else if ((d->options & QGLView::ObjectPicking) != 0) {

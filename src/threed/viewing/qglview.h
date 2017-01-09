@@ -136,8 +136,6 @@ private:
     void wheel(int delta);
     void pan(int deltax, int deltay);
     void rotate(int deltax, int deltay);
-
-    bool rightclick;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(QGLView::Options)
