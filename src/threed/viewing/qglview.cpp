@@ -1052,10 +1052,12 @@ void QGLView::mouseMoveEvent(QMouseEvent *e)
     if (d->panning) {
         QPoint delta = e->pos() - d->startPan;
         if (e->modifiers() == d->panModifiers) {
-            d->camera->setEye(d->startEye);
+          std::cout << "in first" << std::endl; 
+          d->camera->setEye(d->startEye);
             d->camera->setCenter(d->startCenter);
             d->camera->setUpVector(d->startUpVector);
         } else {
+          std::cout << "in second" << std::endl; 
             d->startPan = d->lastPan;
             delta = e->pos() - d->startPan;
             d->startEye = d->camera->eye();
@@ -1066,8 +1068,10 @@ void QGLView::mouseMoveEvent(QMouseEvent *e)
         d->lastPan = e->pos();
         if ((e->modifiers() & Qt::ControlModifier) != 0)
             wheel(delta.y() * -60);
-        else if ((e->modifiers() & Qt::ShiftModifier) != 0 && e->button() != Qt::RightButton)
+        else if ((e->modifiers() & Qt::ShiftModifier) != 0 && e->button() != Qt::RightButton) {
+          std::cout << "in third" << std::endl; 
             pan(delta.x(), delta.y());
+        }
         else
             rotate(delta.x(), delta.y());
     } else if ((d->options & QGLView::ObjectPicking) != 0) {
