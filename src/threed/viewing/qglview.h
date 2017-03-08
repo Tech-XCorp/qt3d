@@ -101,6 +101,8 @@ public:
 
     QVector3D mapPoint(const QPoint &point) const;
 
+    void setPanningScale(const double& dx, const double& dy, const double& dz);
+
 protected:
     void initializeGL();
     void resizeGL(int w, int h);
@@ -136,6 +138,7 @@ private:
     void wheel(int delta);
     void pan(int deltax, int deltay);
     void rotate(int deltax, int deltay);
+    double panFactor;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(QGLView::Options)

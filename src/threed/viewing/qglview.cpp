@@ -555,6 +555,7 @@ QGLView::QGLView(QWidget *parent)
     setMouseTracking(true);
     if (!parent)
         d->processStereoOptions(this);
+    panFactor = 1.0;
 }
 
 /*!
@@ -572,6 +573,7 @@ QGLView::QGLView(const QGLFormat& format, QWidget *parent)
     setMouseTracking(true);
     if (!parent)
         d->processStereoOptions(this);
+    panFactor = 1.0;
 }
 
 /*!
@@ -1378,7 +1380,7 @@ void QGLView::sendLeaveEvent(QObject *object)
 void QGLView::wheel(int delta)
 {
     if (d->options & QGLView::FOVZoom) {     
-        //Use field-of view as zoom (much like a traditional camera)
+      //Use field-of view as zoom (much like a traditional camera)
         qreal scale = qAbs(viewDelta(delta, delta).x());
         if (delta < 0)
             scale = -scale;
@@ -1392,7 +1394,7 @@ void QGLView::wheel(int delta)
         else
             d->camera->setViewSize(d->camera->viewSize() / scale);
     } else {
-        // enable this to get wheel navigation that actually zooms by moving the
+      // enable this to get wheel navigation that actually zooms by moving the
         // camera back, as opposed to making the angle of view wider.        
         QVector3D viewVector = camera()->eye() - camera()->center();
         qreal zoomIncrement  = -float(delta) / 120.0f;
@@ -1410,7 +1412,9 @@ void QGLView::wheel(int delta)
 void QGLView::pan(int deltax, int deltay)
 {
     QPointF delta = viewDelta(deltax, deltay);
-    QVector3D t = d->camera->translation(delta.x(), -delta.y(), 0.0f);
+    qreal deltaX = panFactor*delta.x();
+    qreal deltaY = panFactor*delta.y();
+    QVector3D t = d->camera->translation(deltaX, -deltaY, 0.0f);
 
     // Technically panning the eye left should make the object appear to
     // move off to the right, but this looks weird on-screen where the user
@@ -1492,6 +1496,17 @@ QPointF QGLView::viewDelta(int deltax, int deltay) const
         scaleY = scaleFactor * ((qreal)w) / ((qreal)h);
     }
     return QPointF(deltax * scaleX / w, deltay * scaleY / h);
+}
+
+void QGLView::setPanningScale(const double& dx, const double& dy, const double& dz) {
+  if (dx > dy && dx > dz)
+    panFactor = dx;
+  else if (dy > dx && dy > dz)
+    panFactor = dy;
+  else if (dz > dx && dz > dy)
+    panFactor = dz;
+  else if (dx == dy && dx == dz)
+    panFactor = dx;
 }
 
 /*!
