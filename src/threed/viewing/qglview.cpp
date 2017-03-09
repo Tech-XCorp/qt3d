@@ -1498,15 +1498,8 @@ QPointF QGLView::viewDelta(int deltax, int deltay) const
     return QPointF(deltax * scaleX / w, deltay * scaleY / h);
 }
 
-void QGLView::setPanningScale(const double& dx, const double& dy, const double& dz) {
-  if (dx > dy && dx > dz)
-    panFactor = dx;
-  else if (dy > dx && dy > dz)
-    panFactor = dy;
-  else if (dz > dx && dz > dy)
-    panFactor = dz;
-  else if (dx == dy && dx == dz)
-    panFactor = dx;
+void QGLView::setPanningScale(const QVector<double>& panScale) {
+  panFactor = *std::max_element(panScale.begin(), panScale.end());
 }
 
 /*!

@@ -101,7 +101,7 @@ public:
 
     QVector3D mapPoint(const QPoint &point) const;
 
-    void setPanningScale(const double& dx, const double& dy, const double& dz);
+    void setPanningScale(const QVector<double>& panScale);
 
 protected:
     void initializeGL();
