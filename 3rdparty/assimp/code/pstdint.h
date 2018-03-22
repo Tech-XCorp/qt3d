@@ -585,6 +585,7 @@
   typedef uint32_t uint_least32_t;
 # define PRINTF_LEAST32_MODIFIER PRINTF_INT32_MODIFIER
 # define PRINTF_LEAST16_MODIFIER PRINTF_INT16_MODIFIER
+#if !defined(_MSV_VER) || (_MSC_VER < 1900)
 # define  UINT_LEAST8_MAX  UINT8_MAX
 # define   INT_LEAST8_MAX   INT8_MAX
 # define UINT_LEAST16_MAX UINT16_MAX
@@ -594,6 +595,7 @@
 # define   INT_LEAST8_MIN   INT8_MIN
 # define  INT_LEAST16_MIN  INT16_MIN
 # define  INT_LEAST32_MIN  INT32_MIN
+#endif
 # ifdef stdint_int64_defined
     typedef  int64_t  int_least64_t;
     typedef uint64_t uint_least64_t;
