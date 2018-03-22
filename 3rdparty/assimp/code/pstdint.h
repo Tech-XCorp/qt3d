@@ -372,12 +372,20 @@
 #endif
 #endif
 
+#define STRING2(x) #x
+#define STRING(x) STRING2(x)
+#ifdef _MSC_VER
+#pragma message("_MSC_VER = " STRING(_MSC_VER))
+#endif
+
 #ifndef UINT32_MAX
 # define UINT32_MAX (0xffffffffUL)
 #endif
 #ifndef uint32_t
 #if (ULONG_MAX == UINT32_MAX) || defined (S_SPLINT_S)
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
   typedef unsigned long uint32_t;
+#endif
 # define UINT32_C(v) v ## UL
 # ifndef PRINTF_INT32_MODIFIER
 #  define PRINTF_INT32_MODIFIER "l"
@@ -407,7 +415,9 @@
 #endif
 #ifndef int32_t
 #if (LONG_MAX == INT32_MAX) || defined (S_SPLINT_S)
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
   typedef signed long int32_t;
+#endif
 # define INT32_C(v) v ## L
 # ifndef PRINTF_INT32_MODIFIER
 #  define PRINTF_INT32_MODIFIER "l"
@@ -469,7 +479,7 @@
 #  ifndef PRINTF_INT64_MODIFIER
 #   define PRINTF_INT64_MODIFIER "ll"
 #  endif
-# elif (defined(__WATCOMC__) && defined(__WATCOM_INT64__)) || (defined(_MSC_VER) && (_MSV_VER < 1900) && _INTEGRAL_MAX_BITS >= 64) || (defined (__BORLANDC__) && __BORLANDC__ > 0x460) || defined (__alpha) || defined (__DECC)
+# elif (defined(__WATCOMC__) && defined(__WATCOM_INT64__)) || (defined(_MSC_VER) && (_MSC_VER < 1900) && _INTEGRAL_MAX_BITS >= 64) || (defined (__BORLANDC__) && __BORLANDC__ > 0x460) || defined (__alpha) || defined (__DECC)
 #  define stdint_int64_defined
    typedef __int64 int64_t;
    typedef unsigned __int64 uint64_t;
@@ -552,8 +562,10 @@
 #  define PRINTF_INTMAX_DEC_WIDTH PRINTF_INT64_DEC_WIDTH
 # endif
 #else
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
   typedef int32_t intmax_t;
   typedef uint32_t uintmax_t;
+#endif
 # define  INTMAX_MAX   INT32_MAX
 # define UINTMAX_MAX  UINT32_MAX
 # define UINTMAX_C(v) UINT32_C(v)
@@ -581,11 +593,13 @@
   typedef  uint8_t  uint_least8_t;
   typedef  int16_t  int_least16_t;
   typedef uint16_t uint_least16_t;
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
   typedef  int32_t  int_least32_t;
   typedef uint32_t uint_least32_t;
+#endif
 # define PRINTF_LEAST32_MODIFIER PRINTF_INT32_MODIFIER
 # define PRINTF_LEAST16_MODIFIER PRINTF_INT16_MODIFIER
-#if !defined(_MSV_VER) || (_MSC_VER < 1900)
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
 # define  UINT_LEAST8_MAX  UINT8_MAX
 # define   INT_LEAST8_MAX   INT8_MAX
 # define UINT_LEAST16_MAX UINT16_MAX
@@ -620,10 +634,12 @@
 
 typedef   int_least8_t   int_fast8_t;
 typedef  uint_least8_t  uint_fast8_t;
+#if !defined(_MSC_VER) || (_MSC_VER < 1900)
 typedef  int_least16_t  int_fast16_t;
 typedef uint_least16_t uint_fast16_t;
 typedef  int_least32_t  int_fast32_t;
 typedef uint_least32_t uint_fast32_t;
+#endif
 #define  UINT_FAST8_MAX  UINT_LEAST8_MAX
 #define   INT_FAST8_MAX   INT_LEAST8_MAX
 #define UINT_FAST16_MAX UINT_LEAST16_MAX
