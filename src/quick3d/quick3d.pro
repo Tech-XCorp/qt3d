@@ -28,6 +28,7 @@ package {
             LIBS += -L../threed -lQt3D
         }
         INCLUDEPATH += ../../include/Qt3D
+        INCLUDEPATH += $$[QT_INSTALL_HEADERS]/Qt3D
     }
     win32 {
         target.path = $$QT3D_INSTALL_BINS

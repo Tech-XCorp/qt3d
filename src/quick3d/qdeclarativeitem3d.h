@@ -50,7 +50,7 @@
 
 #include <QtDeclarative/qdeclarativeitem.h>
 
-#include "qglscenenode.h"
+#include <Qt3D/qglscenenode.h>
 #include "qglpainter.h"
 #include "qgraphicstransform3d.h"
 
