@@ -41,10 +41,10 @@
 
 #include "qdeclarativemesh.h"
 
-#include "qglabstractscene.h"
-#include "qglscenenode.h"
-#include "qglmaterial.h"
-#include "qglmaterialcollection.h"
+#include <Qt3D/qglabstractscene.h>
+#include <Qt3D/qglscenenode.h>
+#include <Qt3D/qglmaterial.h>
+#include <Qt3D/qglmaterialcollection.h>
 
 #include <QNetworkRequest>
 #include <QNetworkReply>

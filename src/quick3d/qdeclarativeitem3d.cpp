@@ -44,10 +44,10 @@
 #include "qdeclarativemesh.h"
 #include "qdeclarativeeffect.h"
 
-#include "qgllightparameters.h"
-#include "qglabstractscene.h"
-#include "qglscenenode.h"
-#include "qglview.h"
+#include <Qt3D/qgllightparameters.h>
+#include <Qt3D/qglabstractscene.h>
+#include <Qt3D/qglscenenode.h>
+#include <Qt3D/qglview.h>
 #include "qgraphicstransform3d.h"
 
 #include <QtGui/qevent.h>

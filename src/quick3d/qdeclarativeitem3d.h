@@ -51,8 +51,8 @@
 #include <QtDeclarative/qdeclarativeitem.h>
 
 #include <Qt3D/qglscenenode.h>
-#include "qglpainter.h"
-#include "qgraphicstransform3d.h"
+#include <Qt3D/qglpainter.h>
+#include <Qt3D/qgraphicstransform3d.h>
 
 QT_BEGIN_HEADER
 

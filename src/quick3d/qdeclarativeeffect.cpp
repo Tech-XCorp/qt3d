@@ -41,8 +41,8 @@
 
 #include "qdeclarativeeffect.h"
 
-#include "qglpainter.h"
-#include "qglmaterial.h"
+#include <Qt3D/qglpainter.h>
+#include <Qt3D/qglmaterial.h>
 
 #include <QNetworkRequest>
 #include <QNetworkReply>
@@ -50,7 +50,7 @@
 #include <QtDeclarative/qdeclarativeengine.h>
 
 #include <qdeclarativeinfo.h>
-#include "qglscenenode.h"
+#include <Qt3D/qglscenenode.h>
 
 /*!
     \qmlclass Effect QDeclarativeEffect

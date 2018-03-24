@@ -50,8 +50,8 @@
 #include <QtDeclarative/qdeclarativeengine.h>
 #include <QtDeclarative/qdeclarativeparserstatus.h>
 
-#include "qglscenenode.h"
-#include "qglpainter.h"
+#include <Qt3D/qglscenenode.h>
+#include <Qt3D/qglpainter.h>
 
 QT_BEGIN_HEADER
 
