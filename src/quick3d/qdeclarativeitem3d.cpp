@@ -48,7 +48,7 @@
 #include <Qt3D/qglabstractscene.h>
 #include <Qt3D/qglscenenode.h>
 #include <Qt3D/qglview.h>
-#include "qgraphicstransform3d.h"
+#include <Qt3D/qgraphicstransform3d.h>
 
 #include <QtGui/qevent.h>
 #include <QtDeclarative/qdeclarativecontext.h>

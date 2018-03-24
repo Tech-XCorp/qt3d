@@ -44,8 +44,8 @@
 #include <Qt3D/qglpainter.h>
 #include <Qt3D/qglmaterial.h>
 
-#include <QNetworkRequest>
-#include <QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
 
 #include <QtDeclarative/qdeclarativeengine.h>
 

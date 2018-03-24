@@ -46,8 +46,8 @@
 #include <Qt3D/qglmaterial.h>
 #include <Qt3D/qglmaterialcollection.h>
 
-#include <QNetworkRequest>
-#include <QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
 #include <QtDeclarative/qdeclarativeengine.h>
 #include <QtCore/qlist.h>
 
